@@ -1,0 +1,30 @@
+<section class="compose">
+  <h2>Post a new quote</h2>
+  <form method="POST" action="/quotes">
+    <label>Quote text
+      <textarea name="text" rows="3" required></textarea>
+    </label>
+    <label>Author (optional)
+      <input type="text" name="author" />
+    </label>
+    <button type="submit">Publish Quote</button>
+  </form>
+</section>
+
+<section class="list">
+  <h2>Recent quotes</h2>
+  <ul class="quotes">
+    <% if (quotes.length === 0) { %>
+      <li>No quotes yet. Be the first!</li>
+    <% } %>
+    <% quotes.forEach(q => { %>
+      <li>
+        <blockquote>
+          <p>“<%= q.text %>”</p>
+          <footer>— <%= q.author || 'Anonymous' %></footer>
+        </blockquote>
+        <a href="/quotes/<%= q.id %>">View & comment (<%= q.comment_count %>)</a>
+      </li>
+    <% }) %>
+  </ul>
+</section>

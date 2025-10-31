@@ -1,0 +1,36 @@
+<article>
+  <header>
+    <blockquote>
+      <p>“<%= quote.text %>”</p>
+      <footer>— <%= quote.author || 'Anonymous' %></footer>
+    </blockquote>
+  </header>
+
+  <section class="comments">
+    <h2>Comments</h2>
+    <ul>
+      <% if (comments.length === 0) { %>
+        <li>No comments yet.</li>
+      <% } %>
+      <% comments.forEach(c => { %>
+        <li>
+          <p><%= c.text %></p>
+          <small>by <%= c.author || 'Anonymous' %> • <%= new Date(c.created_at).toLocaleString() %></small>
+        </li>
+      <% }) %>
+    </ul>
+  </section>
+
+  <section class="compose">
+    <h3>Add a comment</h3>
+    <form method="POST" action="/quotes/<%= quote.id %>/comments">
+      <label>Comment
+        <textarea name="text" rows="3" required></textarea>
+      </label>
+      <label>Name (optional)
+        <input type="text" name="author" />
+      </label>
+      <button type="submit">Post Comment</button>
+    </form>
+  </section>
+</article>
